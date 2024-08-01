@@ -18,11 +18,7 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
+  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb)))
     rgb(var(--background-start-rgb));
 }
 
@@ -30,4 +26,30 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+fc-scrollgrid {
+  background-color: #1c252e;
+}
+
+.fc .fc-scrollgrid-section-sticky > * {
+  background: inherit;
+  position: sticky;
+  z-index: 3;
+}
+
+.fc .fc-license-message {
+  display: none;
+}
+
+.fc-button-primary {
+  background-color: #00c4f5;
+}
+
+fc-col-header-cell {
+  border-color: transparent;
+}
+
+fc-col-header-cell-cushion {
+  color: #ffffff;
 }
