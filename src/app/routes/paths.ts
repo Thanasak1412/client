@@ -17,4 +17,7 @@ export const PATH_API = {
   todo: {
     create: '/todo',
   },
+  auth: {
+    login: path(ROOTS_AUTH, '/login'),
+  },
 };
