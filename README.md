@@ -68,35 +68,37 @@ A simple and intuitive TODO application to help you manage your tasks and stay o
 5. Open `http://localhost:3000` in your browser.
 
 ## Code structure
-│ ├── .next/ # Next.js build output
-│ ├── .yarn/ # Yarn dependencies
-│ ├── node_modules/ # Node.js modules
-│ ├── public/ # Static assets
-│ │ ├── illustration_dashboard.png
-│ │ └── illustration_login.png
-│ ├── src/ # Source code
-│ │ ├── app/ # Application routes and pages
-│ │ │ ├── (auth)/ # Authentication-related routes
-│ │ │ └── (dashboard)/ # Dashboard-related routes
-│ │ ├── app/ui/ # UI components
-│ │ ├── app/utils/ # Utility functions
-│ │ ├── app/favicon.ico # Favicon
-│ │ ├── app/globals.css # Global styles
-│ │ ├── app/layout.tsx # Layout component
-│ │ └── app/page.tsx # Main page
-│ ├── .env # Environment variables
-│ ├── .eslintrc.json # ESLint configuration
-│ ├── .gitignore # Git ignore file
-│ ├── .prettierignore # Prettier ignore file
-│ ├── .prettierrc # Prettier configuration
-│ ├── .yarnrc.yml # Yarn configuration
-│ ├── config.ts # Configuration file
-│ ├── next-env.d.ts # TypeScript environment definitions
-│ ├── next.config.mjs # Next.js configuration
-│ ├── package-lock.json # npm package lock file
-│ ├── package.json # npm package file
-│ ├── postcss.config.mjs # PostCSS configuration
-│ ├── README.md # Project README
-│ ├── tailwind.config.ts # Tailwind CSS configuration
-│ ├── tsconfig.json # TypeScript configuration
-│ └── yarn.lock # Yarn lock file
+   ```
+   │ ├── .next/ # Next.js build output
+   │ ├── .yarn/ # Yarn dependencies
+   │ ├── node_modules/ # Node.js modules
+   │ ├── public/ # Static assets
+   │ │ ├── illustration_dashboard.png
+   │ │ └── illustration_login.png
+   │ ├── src/ # Source code
+   │ │ ├── app/ # Application routes and pages
+   │ │ │ ├── (auth)/ # Authentication-related routes
+   │ │ │ └── (dashboard)/ # Dashboard-related routes
+   │ │ ├── app/ui/ # UI components
+   │ │ ├── app/utils/ # Utility functions
+   │ │ ├── app/favicon.ico # Favicon
+   │ │ ├── app/globals.css # Global styles
+   │ │ ├── app/layout.tsx # Layout component
+   │ │ └── app/page.tsx # Main page
+   │ ├── .env # Environment variables
+   │ ├── .eslintrc.json # ESLint configuration
+   │ ├── .gitignore # Git ignore file
+   │ ├── .prettierignore # Prettier ignore file
+   │ ├── .prettierrc # Prettier configuration
+   │ ├── .yarnrc.yml # Yarn configuration
+   │ ├── config.ts # Configuration file
+   │ ├── next-env.d.ts # TypeScript environment definitions
+   │ ├── next.config.mjs # Next.js configuration
+   │ ├── package-lock.json # npm package lock file
+   │ ├── package.json # npm package file
+   │ ├── postcss.config.mjs # PostCSS configuration
+   │ ├── README.md # Project README
+   │ ├── tailwind.config.ts # Tailwind CSS configuration
+   │ ├── tsconfig.json # TypeScript configuration
+   │ └── yarn.lock # Yarn lock file
+```
