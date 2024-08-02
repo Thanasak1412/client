@@ -10,7 +10,7 @@ export const PATH_AUTH = {
 };
 
 export const PATH_DASHBOARD = {
-  todo: path(ROOTS_DASHBOARD, '/todo'),
+  todo: path(ROOTS_DASHBOARD, '/todos'),
 };
 
 export const PATH_API = {
