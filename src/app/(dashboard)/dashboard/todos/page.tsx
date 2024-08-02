@@ -1,4 +1,4 @@
-import Calendar from '../../ui/todo/calendar';
+import Calendar from '../../../ui/todo/calendar';
 
 export default async function Page() {
   // FETCHING ALL TODO FROM API USING DATA FETCHING
