@@ -1,31 +1,39 @@
 'use client';
 
-import { useRef } from 'react';
-import { type EventSourceInput } from '@fullcalendar/core';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { type EventClickArg } from '@fullcalendar/core';
 import FullCalendar from '@fullcalendar/react';
 import listPlugin from '@fullcalendar/list';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import timelinePlugin from '@fullcalendar/timeline';
-import interactionPlugin, { type DateClickArg } from '@fullcalendar/interaction';
+import interactionPlugin from '@fullcalendar/interaction';
 import { PlusIcon, CheckCircleIcon } from '@heroicons/react/24/solid';
 
-import { useState } from 'react';
 import { toast } from 'react-toastify';
 
 import { CalendarForm } from '../calendar';
 import Modal from './modal';
-import { createTodo, type State } from '../../lib/actions/todo';
+import {
+  createTodo,
+  deleteTodo,
+  getTodoById,
+  TodoItem,
+  updateTodo,
+  type State,
+} from '../../lib/actions/todo';
 import { cn } from '../../utils/client';
 
 type CalendarState = {
-  events: EventSourceInput;
+  events: TodoItem[];
+  event: TodoItem | null;
   isOpenModal: boolean;
   selectedEventId: null | string;
 };
 
 const initialState: CalendarState = {
   events: [],
+  event: null,
   isOpenModal: false,
   selectedEventId: null,
 };
@@ -35,20 +43,22 @@ export default function Calendar({ events }: Readonly<{ events: CalendarState['e
 
   const formRef = useRef<HTMLFormElement>(null);
 
-  const notifySuccess = () =>
+  const notifySuccess = (action: string) =>
     toast(
       <div className="flex flex-row items-center space-x-2">
         <CheckCircleIcon className="text-green-500 size-4" />{' '}
-        <h2 className="text-sm">Create success!</h2>
+        <h2 className="text-sm">{action} success!</h2>
       </div>
     );
 
-  const handleSelectEvent = (arg: DateClickArg) => {
+  const handleSelectDate = () => {
     setCalendar((prev) => ({
       ...prev,
       isOpenModal: true,
-      selectedEventId: arg.dateStr, // * refer date string is an id
+      selectedEventId: null,
     }));
+
+    formRef.current?.reset();
   };
 
   const handleToggleModal = () => {
@@ -56,21 +66,69 @@ export default function Calendar({ events }: Readonly<{ events: CalendarState['e
       ...prev,
       isOpenModal: !prev.isOpenModal,
     }));
+
+    if (!calendar.selectedEventId) {
+      formRef.current?.reset();
+    }
   };
 
-  const handleFormAction = async (_prevState: State, formData: FormData) => {
-    const res = await createTodo(_prevState, formData);
+  const handleFormAction = useCallback(
+    async (_prevState: State, formData: FormData) => {
+      const res = await (!calendar.selectedEventId
+        ? createTodo(_prevState, formData)
+        : updateTodo(calendar.selectedEventId, formData));
 
-    if (!Object.keys(res?.errors ?? {}).length) {
+      if (!Object.keys(res?.errors ?? {}).length) {
+        handleToggleModal();
+
+        notifySuccess(res?.message ?? 'Saved');
+
+        formRef.current?.reset();
+      }
+
+      return res;
+    },
+    [calendar]
+  );
+
+  const handleDeleteAction = async () => {
+    const isSuccess = await deleteTodo.bind(null, calendar.selectedEventId ?? '')();
+
+    if (isSuccess) {
       handleToggleModal();
 
-      notifySuccess();
+      notifySuccess('Deleted');
 
       formRef.current?.reset();
     }
-
-    return res;
   };
+
+  const handleSelectEvent = (arg: EventClickArg) => {
+    setCalendar((prev) => ({ ...prev, selectedEventId: arg.event.id, isOpenModal: true }));
+  };
+
+  const getTodoItem = useCallback(async () => {
+    if (calendar.selectedEventId) {
+      const todo = await getTodoById(calendar.selectedEventId);
+
+      setCalendar((prev) => ({
+        ...prev,
+        event: todo,
+      }));
+    }
+  }, [calendar.selectedEventId]);
+
+  useEffect(() => {
+    getTodoItem();
+  }, [calendar.selectedEventId, getTodoItem]);
+
+  // * to set events to setCalendar state, when events changed.
+  useEffect(() => {
+    setCalendar((prev) => ({
+      ...prev,
+      events,
+    }));
+  }, [events]);
 
   return (
     <div className="w-[calc(100%-2px)] -ml-1 -mb-1">
@@ -81,8 +139,10 @@ export default function Calendar({ events }: Readonly<{ events: CalendarState['e
         body={
           <CalendarForm
             handleFormAction={handleFormAction}
-            handleCancel={() => console.log('cancel')}
+            handleCancel={handleToggleModal}
+            handleDelete={handleDeleteAction}
             ref={formRef}
+            todoItem={calendar.event}
           />
         }
         buttonToggle={
@@ -109,7 +169,8 @@ export default function Calendar({ events }: Readonly<{ events: CalendarState['e
           initialView="dayGridMonth"
           initialDate={new Date()}
           eventDisplay="block"
-          dateClick={handleSelectEvent}
+          dateClick={handleSelectDate}
+          eventClick={handleSelectEvent}
           height="auto"
           plugins={[listPlugin, dayGridPlugin, timelinePlugin, timeGridPlugin, interactionPlugin]}
         />

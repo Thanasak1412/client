@@ -15,7 +15,11 @@ export const PATH_DASHBOARD = {
 
 export const PATH_API = {
   todo: {
+    getTodoByUser: '/todo',
+    getTodoById: (todoId: string) => path('/todo', `/${todoId}`),
     create: '/todo',
+    delete: (todoId: string) => path('/todo', `/${todoId}`),
+    update: (todoId: string) => path('/todo', `/${todoId}`),
   },
   auth: {
     login: path(ROOTS_AUTH, '/login'),
