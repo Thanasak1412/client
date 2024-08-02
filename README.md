@@ -34,3 +34,69 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+# TODO App
+
+A simple and intuitive TODO application to help you manage your tasks and stay organized. This app allows you to add, edit, mark as complete, and delete tasks, making it easy to keep track of what you need to do.
+
+## Features
+
+- Add new tasks
+- Edit existing tasks
+- Delete tasks
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/username/todo-app.git
+   ```
+2. Navigate to the client directory:
+   ```bash
+   cd todo-list/client
+   ```
+3. Install dependencies:
+   ```bash
+   yarn install or npm install
+   ```
+    
+4. Start the development server:
+   ```bash
+   yarn start
+   ```
+
+5. Open `http://localhost:3000` in your browser.
+
+## Code structure
+│ ├── .next/ # Next.js build output
+│ ├── .yarn/ # Yarn dependencies
+│ ├── node_modules/ # Node.js modules
+│ ├── public/ # Static assets
+│ │ ├── illustration_dashboard.png
+│ │ └── illustration_login.png
+│ ├── src/ # Source code
+│ │ ├── app/ # Application routes and pages
+│ │ │ ├── (auth)/ # Authentication-related routes
+│ │ │ └── (dashboard)/ # Dashboard-related routes
+│ │ ├── app/ui/ # UI components
+│ │ ├── app/utils/ # Utility functions
+│ │ ├── app/favicon.ico # Favicon
+│ │ ├── app/globals.css # Global styles
+│ │ ├── app/layout.tsx # Layout component
+│ │ └── app/page.tsx # Main page
+│ ├── .env # Environment variables
+│ ├── .eslintrc.json # ESLint configuration
+│ ├── .gitignore # Git ignore file
+│ ├── .prettierignore # Prettier ignore file
+│ ├── .prettierrc # Prettier configuration
+│ ├── .yarnrc.yml # Yarn configuration
+│ ├── config.ts # Configuration file
+│ ├── next-env.d.ts # TypeScript environment definitions
+│ ├── next.config.mjs # Next.js configuration
+│ ├── package-lock.json # npm package lock file
+│ ├── package.json # npm package file
+│ ├── postcss.config.mjs # PostCSS configuration
+│ ├── README.md # Project README
+│ ├── tailwind.config.ts # Tailwind CSS configuration
+│ ├── tsconfig.json # TypeScript configuration
+│ └── yarn.lock # Yarn lock file
