@@ -1,6 +1,12 @@
+import { Metadata } from 'next';
+
 import Image from '@/app/ui/image';
 import { cn } from '@/app/utils/client';
 import LoginForm from '@/app/ui/login-form';
+
+export const metadata: Metadata = {
+  title: 'Sign In',
+};
 
 export default function Page() {
   return (

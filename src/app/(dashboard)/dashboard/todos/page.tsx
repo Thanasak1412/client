@@ -1,5 +1,11 @@
+import { Metadata } from 'next';
+
 import Calendar from '../../../ui/todo/calendar';
 import { getTodoList } from '../../../lib/actions/todo';
+
+export const metadata: Metadata = {
+  title: 'Todo',
+};
 
 export default async function Page() {
   // FETCHING ALL TODO FROM API USING DATA FETCHING
