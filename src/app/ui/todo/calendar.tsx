@@ -1,6 +1,7 @@
 'use client';
 
-import { type EventSourceInput, EventClickArg } from '@fullcalendar/core';
+import { useRef } from 'react';
+import { type EventSourceInput } from '@fullcalendar/core';
 import FullCalendar from '@fullcalendar/react';
 import listPlugin from '@fullcalendar/list';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -14,7 +15,7 @@ import { toast } from 'react-toastify';
 
 import { CalendarForm } from '../calendar';
 import Modal from './modal';
-import { createTodo, State } from '../../lib/actions/todo';
+import { createTodo, type State } from '../../lib/actions/todo';
 import { cn } from '../../utils/client';
 
 type CalendarState = {
@@ -31,6 +32,8 @@ const initialState: CalendarState = {
 
 export default function Calendar({ events }: Readonly<{ events: CalendarState['events'] }>) {
   const [calendar, setCalendar] = useState({ ...initialState, events });
+
+  const formRef = useRef<HTMLFormElement>(null);
 
   const notifySuccess = () =>
     toast(
@@ -62,6 +65,8 @@ export default function Calendar({ events }: Readonly<{ events: CalendarState['e
       handleToggleModal();
 
       notifySuccess();
+
+      formRef.current?.reset();
     }
 
     return res;
@@ -77,6 +82,7 @@ export default function Calendar({ events }: Readonly<{ events: CalendarState['e
           <CalendarForm
             handleFormAction={handleFormAction}
             handleCancel={() => console.log('cancel')}
+            ref={formRef}
           />
         }
         buttonToggle={
