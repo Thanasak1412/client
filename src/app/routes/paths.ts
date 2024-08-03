@@ -13,6 +13,8 @@ export const PATH_DASHBOARD = {
   todo: path(ROOTS_DASHBOARD, '/todos'),
 };
 
+export const PATH_HOMEPAGE = '/';
+
 export const PATH_API = {
   todo: {
     getTodoByUser: '/todo',
